@@ -1,0 +1,12 @@
+Package: agileoracle
+Title: Methods and simulations for evaluating agile sofware delivery processes
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Brad",
+           family = "West",
+           role = c("aut", "cre"),
+           email = "brad.g.west@gmail.com")
+Description: Methods and simulations for evaluating agile sofware delivery processes.
+License: MIT
+Encoding: UTF-8
+LazyData: true

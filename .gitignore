@@ -1,0 +1,16 @@
+README.final.md
+
+.Rproj.user
+TODO
+
+# R specific
+.Rhistory
+.Rdata
+*.Rproj
+packrat/lib*/
+
+# Latex
+**/*.tex
+**/*.log
+**/*.pdf
+**/*.synctex.gz

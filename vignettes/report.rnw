@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+Agile[1:] methods in software development place strong emphasis on software
+delivery speed. Shipping software faster means new features are delivered to
+customers faster. Recent studies claim that elite software companies deliver
+software x times faster than their competitors. On the operations side, this
+often manifests itself as new process improvements or better agaile coaching.
+At the time of writing, there were x number of jobs open in the US for
+positions related to agile coaching or training.
+
+It's common practice to measure things like lead time for delivery performance.
+These metrics are easy to display. But how can companies systematically
+determine whether one system is better than others?
+
+In the world of microservices, it's common to have multiple teams working on
+many different repositories.
+
+In this project we provide a statistical modeling framework for analyzing
+software delivery performance, with the specific intention of being able
+to infer causality between two different treatments applied across a
+company's or project's codebase.
+
+* Include a bunch of things like randomly signing by PR, by repo in team,
+by team
+
+
+\end{document}
