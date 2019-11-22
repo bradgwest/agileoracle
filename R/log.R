@@ -1,21 +1,55 @@
 # Utility functions
 
-INFO_PREFIX <-  "INFO: "
-WARN_PREFIX <- "WARN: "
-ERR_PREFIX <- "ERROR: "
+INFO_PREFIX <-  "INFO - "
+WARN_PREFIX <- "WARN - "
+ERR_PREFIX <- "ERROR - "
 
+#' Standard formatting for log messages
+#'
+#' @param msg
+#' @param ...
+#' @param prefix
+#'
+#' @return
+#'
+#' @examples
 fmtlog <- function(msg, ..., prefix) {
-  sprintf(paste0(prefix, msg), ...)
+  current_utc_time <- format(Sys.time(), tz="UTC")
+  sprintf(paste0(prefix, current_utc_time, ": ", msg), ...)
 }
 
+#' Standard info log
+#'
+#' @param msg
+#' @param ...
+#'
+#' @return
+#'
+#' @examples
 info <- function(msg, ...) {
-  fmtlog(msg, ..., INFO_PREFIX)
+  fmtlog(msg, ..., prefix=INFO_PREFIX)
 }
 
+#' Standard warn log
+#'
+#' @param msg
+#' @param ...
+#'
+#' @return
+#'
+#' @examples
 warn <- function(msg, ...) {
-  fmtlog(msg, ..., WARN_PREFIX)
+  fmtlog(msg, ..., prefix=WARN_PREFIX)
 }
 
+#' Standard error log
+#'
+#' @param msg
+#' @param ...
+#'
+#' @return
+#'
+#' @examples
 error <- function(msg, ...) {
-  fmtlog(msg, ..., ERR_PREFIX)
+  fmtlog(msg, ..., prefix=ERR_PREFIX)
 }

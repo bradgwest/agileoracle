@@ -20,13 +20,14 @@
 #' @return list of length 4 with dev, pr, build, and release times
 #' @export
 gen_feature_lead_time <- function(dev, pr, build, release) {
-  if (!(length(dev) == length(pr) == length(build) == length(release))) {
-    error("`gen_feature_lead_time` takes vectors of equal length")
-  }
-  list(
+  lead_time <- list(
     "dev" = dev,
     "pr" = pr,
     "build" = build,
     "release" = release
   )
+  if (length(unique(lapply(lead_time, length))) != 1) {
+    stop("`gen_feature_lead_time` takes vectors of equal length")
+  }
+  lead_time
 }
