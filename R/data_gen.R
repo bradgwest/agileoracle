@@ -1,6 +1,6 @@
 # This script exposes convenience functions for generating data
 
-#' Generate a Feature's Lead Time
+#' Build a Feature's Lead Time
 #'
 #' The most granular unit of software delivery speed is the lead time of a single pull request. There are four
 #' component measurements of a PR's lead time, the sum of which is the aggregate lead time for that PR. The four
@@ -12,22 +12,43 @@
 #'      environment
 #'
 #'
-#' @param dev numeric vector. Development time in seconds
-#' @param pr numeric vector. Pull request time in seconds
-#' @param build numeric vector. Build time in seconds
-#' @param release numeric vector. Release time in seconds
+#' @param dev function that takes a single argument, n, and returns a numeric vector of length n
+#' @param pr function that takes a single argument, n, and returns a numeric vector of length n
+#' @param build function that takes a single argument, n, and returns a numeric vector of length n
+#' @param release function that takes a single argument, n, and returns a numeric vector of length n
+#' @param n numeric vec of length 1
 #'
-#' @return list of length 4 with dev, pr, build, and release times
 #' @export
-gen_feature_lead_time <- function(dev, pr, build, release) {
-  lead_time <- list(
-    "dev" = dev,
-    "pr" = pr,
-    "build" = build,
-    "release" = release
+#' @return list of length 4 with dev, pr, build, and release times
+build_feature_lead_time <- function(dev, pr, build, release, n=NULL) {
+  if (length(n) != 1) {stop("`n` must be length 1")}
+  list(
+    "dev" = dev(n),
+    "pr" = pr(n),
+    "build" = build(n),
+    "release" = release(n)
   )
-  if (length(unique(lapply(lead_time, length))) != 1) {
-    stop("`gen_feature_lead_time` takes vectors of equal length")
-  }
-  lead_time
 }
+
+#' Closure helper of random generators
+#'
+#' @param n number of samples
+#' @param fnc random generator to use
+#' @param ... passed to generator function
+#'
+#' @return
+#' @export
+#'
+#' @examples
+.rgen <- function(fnc) {
+  function(n, ...) {
+    function() {
+      fnc(n, ...)
+    }
+  }
+}
+
+.rnorm <- .rgen(rnorm)
+.rgamma <- .rgen(rgamma)
+# plot(data.frame(x=seq(0, 10, 0.1), y = dgamma(seq(0, 10, 0.1), shape = 2)))
+
