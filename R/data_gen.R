@@ -12,25 +12,23 @@
 #'      environment
 #'
 #'
-#' @param dev function that takes a single argument, n, and returns a numeric vector of length n
-#' @param pr function that takes a single argument, n, and returns a numeric vector of length n
-#' @param build function that takes a single argument, n, and returns a numeric vector of length n
-#' @param release function that takes a single argument, n, and returns a numeric vector of length n
-#' @param n numeric vec of length 1
+#' @param dev numeric vector of length n
+#' @param pr numeric vector of length n
+#' @param build numeric vector of length n
+#' @param release numeric vector of length n
 #'
 #' @export
 #' @return list of length 4 with dev, pr, build, and release times
-build_feature_lead_time <- function(dev, pr, build, release, n=NULL) {
-  if (length(n) != 1) {stop("`n` must be length 1")}
+build_feature_lead_time <- function(dev, pr, build, release) {
   list(
-    "dev" = dev(n),
-    "pr" = pr(n),
-    "build" = build(n),
-    "release" = release(n)
+    "dev" = dev,
+    "pr" = pr,
+    "build" = build,
+    "release" = release
   )
 }
 
-#' Closure helper of random generators
+#' Closure helper for random generators
 #'
 #' @param n number of samples
 #' @param fnc random generator to use
@@ -40,15 +38,11 @@ build_feature_lead_time <- function(dev, pr, build, release, n=NULL) {
 #' @export
 #'
 #' @examples
-.rgen <- function(fnc) {
-  function(n, ...) {
-    function() {
-      fnc(n, ...)
-    }
+#' # Calling .rnorm() is equivalent to calling rnorm(n, mean = 3, sd = 10)
+#' .rnorm <- rgen(10, rnorm, mean = 3, sd = 10)
+rgen <- function(n, fnc, ...) {
+  function() {
+    fnc(n, ...)
   }
 }
-
-.rnorm <- .rgen(rnorm)
-.rgamma <- .rgen(rgamma)
-# plot(data.frame(x=seq(0, 10, 0.1), y = dgamma(seq(0, 10, 0.1), shape = 2)))
 
