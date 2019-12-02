@@ -1,5 +1,21 @@
 # Initialization functions
 
+startup_message <- "
+   _|_|      _|_|_|  _|_|_|  _|        _|_|_|_|
+ _|    _|  _|          _|    _|        _|
+ _|_|_|_|  _|  _|_|    _|    _|        _|_|_|
+ _|    _|  _|    _|    _|    _|        _|
+ _|    _|    _|_|_|  _|_|_|  _|_|_|_|  _|_|_|_|
+
+    _|_|    _|_|_|      _|_|      _|_|_|  _|        _|_|_|_|
+ _|    _|  _|    _|  _|    _|  _|        _|        _|
+ _|    _|  _|_|_|    _|_|_|_|  _|        _|        _|_|_|
+ _|    _|  _|    _|  _|    _|  _|        _|        _|
+   _|_|    _|    _|  _|    _|    _|_|_|  _|_|_|_|  _|_|_|_|
+____________________________________________________________
+Insights into software delivery performance.
+"
+
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage("AGILE ORACLE: Insights into software delivery performance")
+  packageStartupMessage(startup_message)
 }
