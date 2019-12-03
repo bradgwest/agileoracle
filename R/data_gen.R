@@ -20,12 +20,24 @@
 #' @export
 #' @return list of length 4 with dev, pr, build, and release times
 build_feature_lead_time <- function(dev, pr, build, release) {
-  list(
+  v <- list(
     "dev" = dev,
     "pr" = pr,
     "build" = build,
     "release" = release
   )
+
+  is_numeric <- sapply(v, is.numeric)
+  if (!is_numeric) {
+    stop("inputs must be numeric")
+  }
+
+  lengths <- sapply(v, length)
+  if (length(unique(lengths)) != 1) {
+    stop("lengths must be equivalent")
+  }
+
+  v
 }
 
 #' Closure helper for random generators
