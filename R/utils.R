@@ -16,37 +16,14 @@ seconds <- function(t, unit=c("hours", "days")) {
   }
 
   if (unit == "days") {
-    return(days_to_seconds(t))
+    return(t * 24 * 3600)
   }
 
   if (unit == "hours") {
-    return(hours_to_seconds(t))
+    return(t * 3600)
   }
 
-  stop(sprintf("%s is not a valid unit", unit))
-}
-
-#' Convert days to seconds
-#'
-#' @param t
-#'
-#' @return
-#'
-#' @examples
-days_to_seconds <- function(t) {
-  t * 24 * 3600
-}
-
-#' Convert hours to seconds
-#'
-#' @param t
-#'
-#' @return
-#' @export
-#'
-#' @examples
-hours_to_seconds <- function(t) {
-  t * 3600
+  stop(sprintf("unsupported unit: %s", unit))
 }
 
 #' Convert a time unit to days
@@ -60,12 +37,12 @@ hours_to_seconds <- function(t) {
 #' @examples
 days <- function(t, unit=c("hours", "seconds")) {
   if (unit == "seconds") {
-    return(t / 3600 / 24)
+    return(t / (3600 * 24))
   }
 
   if (unit == "hours") {
-    return(t * 24)
+    return(t / 24)
   }
 
-  stop(sprintf("%s is not a valid unit", unit))
+  stop(sprintf("unsupported unit: %s", unit))
 }
