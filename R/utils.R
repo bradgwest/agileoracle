@@ -9,10 +9,9 @@
 #' @export
 #'
 #' @examples
-seconds <- function(t, unit=c("hours", "days")) {
-  if (length(unit) > 1) {
-    warning(sprintf("unit not specified, using %s", unit[1]))
-    unit = unit[1]
+seconds <- function(t, unit=NULL) {
+  if (is.null(unit)) {
+    return(t)
   }
 
   if (unit == "days") {
@@ -21,6 +20,27 @@ seconds <- function(t, unit=c("hours", "days")) {
 
   if (unit == "hours") {
     return(t * 3600)
+  }
+
+  stop(sprintf("unsupported unit: %s", unit))
+}
+
+#' Convert a time unit to hours
+#'
+#' @param t
+#' @param unit
+#'
+#' @return
+#' @export
+#'
+#' @examples
+hours <- function(t, unit = NULL) {
+  if (is.null(unit)) {
+    return(t)
+  }
+
+  if (unit == "days") {
+    return(t * 24)
   }
 
   stop(sprintf("unsupported unit: %s", unit))
@@ -35,9 +55,13 @@ seconds <- function(t, unit=c("hours", "days")) {
 #' @export
 #'
 #' @examples
-days <- function(t, unit=c("hours", "seconds")) {
+days <- function(t, unit=NULL) {
+  if (is.null(unit)) {
+    return(t)
+  }
+
   if (unit == "seconds") {
-    return(t / (3600 * 24))
+    return(t / 3600 / 24)
   }
 
   if (unit == "hours") {

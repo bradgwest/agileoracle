@@ -9,3 +9,9 @@ test_that("days function is correct", {
   expect_equal(days(24, "hours"), 1)
   expect_condition(days(2, "minutes"), regexp = ".*unsupported.*")
 })
+
+test_that("hours function is correct", {
+  expect_equal(hours(1, "days"), 24)
+  expect_equal(hours(5), 5)
+  expect_condition(hours(2, "minutes"), regexp = ".*unsupported.*")
+})
