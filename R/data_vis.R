@@ -25,3 +25,36 @@ theme_oracle <- function() {
       )
   )
 }
+
+#' Plot a single distribution
+#'
+#' @param t time measurements
+#' @param geom Geom to use
+#' @param ... Args to pass to geom function
+#'
+#' @return
+#'
+#' @examples
+plot_dist <- function(t, geom, ...) {
+  ggplot2::ggplot(data = data.frame(t), mapping = ggplot2::aes(x = t)) +
+    geom(...) +
+    theme_oracle()
+}
+
+#' Visualize a feature's distributions
+#'
+#' @param feature list of 4 feature components
+#'
+#' @return
+#' @export
+#'
+#' @examples
+plot_feature_distribution <- function(features) {
+  plots <- lapply(features, plot_dist, geom = ggplot2::geom_histogram, bins = 20)
+  # Add some titles
+  for (i in 1:length(plots)) {
+    plots[[i]] <- plots[[i]] + ggplot2::labs(title = names(features[i]))
+  }
+  # Arrange like mfrow(par = c())
+  gridExtra::grid.arrange(grobs = plots, ncol = ceiling(length(plots)/2))
+}
