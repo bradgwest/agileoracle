@@ -28,7 +28,7 @@ build_feature_lead_time <- function(dev, pr, build, release) {
   )
 
   is_numeric <- sapply(v, is.numeric)
-  if (!is_numeric) {
+  if (!all(is_numeric)) {
     stop("inputs must be numeric")
   }
 
