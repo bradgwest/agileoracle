@@ -16,6 +16,8 @@
 # some features linger for long periods of time due to a number of potential reasons including complexity, bugs, and
 # staleness.
 
+# TODO: Get actual values from github to check your assumptions
+
 # Set the number of features
 n <- 200
 
