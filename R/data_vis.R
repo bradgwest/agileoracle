@@ -50,7 +50,7 @@ plot_dist <- function(t, geom, ...) {
 #'
 #' @examples
 plot_feature_distribution <- function(features) {
-  plots <- lapply(features, plot_dist, geom = ggplot2::geom_histogram, bins = 20)
+  plots <- lapply(features, plot_dist, geom = ggplot2::geom_histogram, bins = 50)
   # Add some titles
   for (i in 1:length(plots)) {
     plots[[i]] <- plots[[i]] + ggplot2::labs(title = names(features[i]))

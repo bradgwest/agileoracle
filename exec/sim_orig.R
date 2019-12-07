@@ -8,16 +8,27 @@
 # and release should also be right skewed, but not to the same degree that dev and PRs are. In general, a build should
 # take about the same time for each PR, while a release should not be highly dependent on the code it includes.
 
-# Set the number of features
-n <- 200
-
 # NOTE: The lines below as is are quite unrealistic. It should be the case that dev time is correlated to pr time,
 # that build and release times are not correlated to either time.
 
+# We use the log-normal distribution for simulating these feature components because they are all positive real values.
+# The most important feature we're trying to recreate is the long right skew, which occurs in software features when
+# some features linger for long periods of time due to a number of potential reasons including complexity, bugs, and
+# staleness.
+
+# Set the number of features
+n <- 200
+
 # Generate dev time
-dev_mean = hours(1, "days")  # What does this parameter mean for a log-normal distribution?
-dev_sd = hours(0.5)  # This too
-.dev <- rgen(n, rlnorm, meanlog = dev_mean, sdlog = dev_sd)
+dev_mean = 0  # Expected value of the random variable's natural logarithm
+dev_sd = 1  # Standard deviation of the random variable natural logarithm
+.dev <- function() {
+  shape <- rgen(n, rlnorm, meanlog = dev_mean, sdlog = dev_sd)()
+  # add a bit of padding
+  shape <- shape + rnorm(n, mean = exp(1), 0.25)
+  # convert to days
+  shape * 24
+}
 
 # Generate pr time
 pr_mean = hours(2)
